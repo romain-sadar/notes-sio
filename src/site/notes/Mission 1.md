@@ -102,38 +102,38 @@ public double Calculimg(int s, int p, int t, int a) /// valorise l'img
 
 public string Resultatimg(int s, double img) ///valorise le message
 {
-            string message = "";
-            if(s==0) /// si femme alors
-            {
-                if (img <= 15)
-                {
-                    message = "Trop Maigre";
-                }
-                else if (15 < img && img <= 30 )
-                {
-                    message = "Parfait";
-                }
-                else 
-                {
-                    message = "Surpoids";
-                }
-            }
-            else if (s==1) /// si homme alors 
-            {
-                if (img <= 10 )
-                {
-                    message = "Trop Maigre";   
-                }
-                else if (10  < img && img <= 25)
-                {
-                    message = "Parfait";
-                }
-                else 
-                {
-                    message = "Surpoids";
-                }
-            }
-            return message;
+    string message = "";
+    if(s==0) /// si femme alors
+    {
+        if (img <= 15)
+        {
+	        message = "Trop Maigre";
+        }
+        else if (15 < img && img <= 30 )
+        {
+            message = "Parfait";
+        }
+        else 
+        {
+            message = "Surpoids";
+        }
+    }
+    else if (s==1) /// si homme alors 
+    {
+        if (img <= 10 )
+        {
+            message = "Trop Maigre";   
+        }
+        else if (10  < img && img <= 25)
+        {
+            message = "Parfait";
+        }
+        else 
+        {
+            message = "Surpoids";
+        }
+    }
+    return message;
 }
 ```
 - Tests unitaires pour vérifier les méthodes :
