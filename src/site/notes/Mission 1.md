@@ -7,7 +7,7 @@
 
 ## Properties
 - Ce dossier contient 2 fichiers : *AndroidManifest.xml* et *AssemblyInfo.cs*.
-#### AndroidManifest.xml
+### AndroidManifest.xml
 - Chaque projet Android comprend un fichier *manifeste*, *AndroidManifest.xml*.
 - Les fichiers manifest d'application Android fournissent des informations à propos de votre application.
 - Contenu du fichier :
@@ -30,7 +30,7 @@
 ```
 
 
-#### AssemblyInfo.cs
+### AssemblyInfo.cs
 - Fournit des propriétés pour obtenir des informations relatives à l'application, telles que le numéro de version, la description, les assemblys chargés, et ainsi de suite.
 - Les assembly désignent un ensemble logiciel cohérent constitué en une unité de déploiement indivisible à partir de plusieurs 'briques' logicielles (ressources, méta données, dépendances...).
 - Contenu du fichier : 
