@@ -3,4 +3,4 @@
 ---
 
 
-[App Coach](/AppMobileCoachXamarin/Mission1)
+[[AppMobileCoachXamarin/Mission1\|Mission1]]
