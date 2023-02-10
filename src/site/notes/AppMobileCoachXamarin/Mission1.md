@@ -3,6 +3,7 @@
 ---
 
 # Présentation du projet
+
 L'application AppCoach est une application android utilisant la plateforme open source Xamarin. Le langage de programmation est C# mais il y a aussi un peu de xml pour certains fichiers. L'application calcule l'IMG (*Indice de Masse Grasse*) de l'utilisateur après que ce dernier ai communiqué son sexe, son age, sa taille et son poids. Enfin, on affiche une appréciation du résultat en fonction des critères de Deurenberg qui diffère pour les femmes et les hommes.
 
 ## Architecture 
