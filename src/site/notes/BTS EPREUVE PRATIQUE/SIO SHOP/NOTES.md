@@ -67,3 +67,32 @@ tb_categ.Text = unProduit.GetCateg();
 
 
 
+# Maj stock
+
+```c#
+private void btMaj_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string path_csv = @"D:\Entrainement\Sio-Shop\data_csv\livraison_22122021.csv";
+                string[] lignes = File.ReadAllLines(path_csv);
+                int lignesAffectees = 0;
+                for(int i = 0; i<lignes.Length; i++)
+                {
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = Program.ConnexionBdd;
+                    string[] parts = lignes[i].Split(';');
+                    string sql = $"UPDATE produit SET stock = stock + {parts[1]} WHERE produit.reference = {parts[0]};";
+                    command.CommandText = sql;
+                    lignesAffectees += command.ExecuteNonQuery();
+
+                }
+                listViewProduit.Items.Clear();
+                AfficheProduit("TOUTES");
+                MessageBox.Show(lignesAffectees + "ligne(s) affectée(s) !");
+
+            }
+            catch { }
+        }
+```
