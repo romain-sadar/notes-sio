@@ -146,26 +146,25 @@ public function FillData(&$data)
 
 ```php
 <?php
-    require_once "modeles/m_gamme.php";
-    class c_consulterProduits
-    {
-        private $modele_gamme;
-        public function __construct()
-        {
-            $this->modele_gamme=new m_gamme();
-        }
-        public function action_accueil()
-        {
-            $this->data['lesGammes']=$this->modele_gamme->GetListe();
-        }
-
-        public function action_listeProduits($idCategorie, $idGamme)
-        {
-            $this->data['laGamme']=$this->modele_gamme->GetGamme($idGamme);
-            $this->data['lesProduits']=$this->modele_produit->GetListe($idCategorie, $idGamme);     // retourne tous les produits si $idCategorie==0
-            require_once "vues/v_listePdt.php";
-        }
-    }
+require_once "modeles/m_gamme.php";
+class c_consulterProduits
+{
+private $modele_gamme;
+public function __construct()
+{
+$this->modele_gamme=new m_gamme();
+}
+public function action_accueil()
+{
+$this->data['lesGammes']=$this->modele_gamme->GetListe();
+}
+public function action_listeProduits($idCategorie, $idGamme)
+{
+$this->data['laGamme']=$this->modele_gamme->GetGamme($idGamme);
+$this->data['lesProduits']=$this->modele_produit->GetListe($idCategorie, $idGamme);     // retourne tous les produits si $idCategorie==0
+require_once "vues/v_listePdt.php";
+}
+}
 ?>
 ```
 
@@ -173,22 +172,28 @@ public function FillData(&$data)
 
 ```php
 if (is_null($this->data['laCategorie']) && is_null($this->data['laGamme']))
-            {
-                echo '<h2>Tous les produits</h2>';
-            }
-            else if (is_null($this->data['laCategorie']))
-            {
-                echo '<h2>Gamme '.$this->data['laGamme']->GetLibelle().'</h2>';
-            }
-            else if (is_null($this->data['laGamme']))
-            {
-                echo '<h2>Catégorie '.$this->data['laCategorie']->GetLibelle().'</h2>';
-            }
-            else
-            {
-                echo '<h2>Catégorie '.$this->data['laCategorie']->GetLibelle().'</h2>';
-            }
+{
+    echo '<h2>Tous les produits</h2>';
+}
+else if (is_null($this->data['laCategorie']))
+{
+    echo '<h2>Gamme '.$this->data['laGamme']->GetLibelle().'</h2>';
+}
+else if (is_null($this->data['laGamme']))
+{
+    echo '<h2>Catégorie '.$this->data['laCategorie']->GetLibelle().'</h2>';
+}
+else
+{
+    echo '<h2>Catégorie '.$this->data['laCategorie']->GetLibelle().'</h2>';
+}
 ```
+
+# Modif appel de action liste produit dans index 
+```php
+$controleur->action_listeProduits($_GET['categ'],$_GET['gamme']);
+```
+
 # Ajout d'un attribut "abo_gam" dans table abonne
 ```sql
 alter table abonne
@@ -197,3 +202,32 @@ alter table abonne
 ADD FOREIGN KEY (abo_gam) REFERENCES gamme(gam_id);
 ```
 
+# Modifier ajout de l'abonner dans la base de donnees dans m_abonne.php
+```php
+$req="insert into abonne values ('".$id."','".$email."','".$date."',".$ok.", ".$gamme.")";
+```
+
+# Ajout de la selection de la gamme au moment de l'inscription 
+```php
+<p>Saisissez votre adresse mail :</p>
+<form action="index.php" method="get">
+<input type="text" name="email" size=100 /><br/>
+<input type="hidden" name="page" value="ajoutAbonne" />
+<select name="gamme" size="1">
+<option selected value="0">Toutes les gammes</option>
+<?php
+foreach ($this->data['lesGammes'] as $uneGamme)
+{
+echo '<option value="'.$uneGamme->GetId().'">'.$uneGamme->GetLibelle().'</option>';
+}
+?>
+</select>
+<input type="submit" value = "Enregistrer" />
+</form>
+```
+
+# Modif du controlleur ajouter abonne 
+```php
+$gamme = $_GET["gamme"];
+$abonne=$this->modele_abonne->Ajouter($id,$email,$date,$ok, $gamme);
+```
